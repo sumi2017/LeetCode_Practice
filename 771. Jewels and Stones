@@ -1,0 +1,29 @@
+/**
+ * @param {string} J
+ * @param {string} S
+ * @return {number}
+ */
+var numJewelsInStones = function(J, S) 
+{
+var JJ =new Array();
+var SS =new Array();
+JJ=J.split("");
+SS=S.split("");
+var count=0
+    for (var i=0;i<JJ.length;i++)
+    {
+        
+     for (var k=0;k<SS.length;k++)
+        {
+        if (JJ[i]==SS[k])
+            {
+            count++; 
+            }
+                
+        }
+        
+    }
+        
+  return count;  
+    
+};
