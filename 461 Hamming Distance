@@ -1,0 +1,85 @@
+
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ 65 ms running time accepted
+**First step:** Consider how to convert decimal-to-binary then put them into two array.
+
+Create function to implement convention.
+i.we know the 0<=x,y<2^31,so set size of array as 32.
+ii.set for loop to compute binary form of every element in the array.
+
+**eg.** if we have input is 4
+then it should be
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0]
+
+we have following steps to caculate:
+4/2=2 remaining 0,put 0 to array[31];
+
+2/2=1 remaining 0,put 0 to array[31-1];  2(new x)=(4(old x)-0(4%2))/2
+
+1/2=0 remaining 1,put 1 to array[31-2];  1(new x)=(2(old x)-0(2%2))/2
+
+0/2=0 remaining 0,put 0 to array[31-3];  0(new x)=(1(old x)-1(1%2))/2
+
+**.
+.
+.**
+we could find that every new x is equal to (old x-x%2)/2. 
+
+repeat 32 times to get the result.
+
+**Second step:** Compare two array and count the difference.
+Create compare function to compare every element in each array, if they are not equal,then count=count+1.
+
+
+ */
+var hammingDistance = function(x, y) {
+
+var tenToTwo = function(x1)
+    {
+    
+    var x2=new Array(32)
+    
+    for (var i=31;i>=0;i--)
+    {
+      x2[i]=x1%2;
+      x1=(x1-x1%2)/2;
+    }
+    
+    return x2;
+
+     
+    }
+    
+    var a=tenToTwo(x);
+    var b=tenToTwo(y);
+ 
+var compare_diff=function(c,d)
+    {
+
+    var count=0;
+    
+      for(var j=0;j<=c.length;j++)
+        {
+            if(c[j]!=d[j])
+                {
+                count++;
+                }
+        }
+    
+    return count;    
+        
+    }
+
+var ans=compare_diff(a,b);
+    
+    
+    
+return ans;    
+
+
+   
+
+};
